@@ -1,0 +1,30 @@
+@import "../../../assets/styles/variables.scss";
+
+.hero-content {
+  padding-top: 25vh;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+
+  h2 {
+    font-size: 50px;
+    color: #fff;
+    text-transform: uppercase;
+    width: 60%;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  button {
+    @include button-secondary;
+    @include button-large;
+    box-shadow: $button-box-shadow;
+    height: 50px;
+
+    &:hover {
+      @include btnHover(#f2a7504a);
+    }
+  }
+}

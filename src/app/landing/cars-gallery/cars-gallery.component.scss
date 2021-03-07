@@ -1,0 +1,22 @@
+@import "../../../assets/styles/variables.scss";
+
+.gallery {
+  @include container;
+  padding-top: 10px;
+  padding-bottom: 50px;
+
+  h2 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-weight: 300;
+    text-transform: uppercase;
+  }
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px 60px;
+    list-style: none;
+    // justify-content: center;
+  }
+}

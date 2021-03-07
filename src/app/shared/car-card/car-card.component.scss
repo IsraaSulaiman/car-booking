@@ -1,0 +1,67 @@
+@import "../../../assets/styles/variables.scss";
+
+.card {
+  height: 345px;
+  background: #fff;
+  width: 260px;
+  padding: 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  border: 1px solid $grey-light;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: center;
+
+  &:hover {
+    @include btnHover($grey-light);
+  }
+
+  & .card-img {
+    padding: 15px;
+  }
+
+  & .card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+
+    h4 {
+      font-size: 18px;
+      font-weight: 500;
+      color: $light-primary-color;
+
+      span {
+        font-size: 14px;
+        font-weight: 300;
+        color: #222;
+      }
+    }
+
+    h3 {
+      font-size: 20px;
+      letter-spacing: 0.03rem;
+      font-weight: 600;
+    }
+
+    button {
+      @include button-default;
+      border: 1px solid $light-primary-color;
+      height: 40px;
+      color: $light-primary-color;
+      font-weight: 500;
+      font-size: 16px;
+      width: 170px;
+      margin-top: 10px;
+      cursor: pointer;
+      transition: all ease-in-out 0.35s;
+
+      &:hover {
+        background: $light-primary-color;
+        color: #fff;
+        border: 1px solid #fff;
+      }
+    }
+  }
+}

@@ -1,0 +1,30 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap");
+
+@import "./assets/styles/variables.scss";
+
+html {
+  box-sizing: border-box;
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+*,
+*:after,
+*:before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+  font-family: $global-font-family;
+}
+
+body {
+  background-color: $grey;
+  font-size: 14px;
+  letter-spacing: 0.2px;
+}
+
+a {
+  text-decoration: none;
+}

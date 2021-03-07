@@ -1,0 +1,52 @@
+$primary-color: #003580;
+$light-primary-color: #0071c2;
+$grey-light: #f1f3f4;
+$grey: #e6e6e6;
+$grey-dark: #707070;
+$secondary-color: #ff9940;
+$global-font-family: "Roboto", sans-serif;
+$button-box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+$hover-button-box-shadow: 0px 10px 13px 0px #07459b;
+$default-btn-width: 147px;
+$medium-btn-width: 236px;
+
+@mixin container {
+  max-width: 1360;
+  padding: 0 100px;
+  margin: 0 auto;
+}
+
+@mixin button-style {
+  border-radius: 3px;
+  border: none;
+  height: 42px;
+}
+
+@mixin button-default {
+  @include button-style;
+  background-color: #fff;
+  width: $default-btn-width;
+  font-weight: 400;
+
+  & > * {
+    color: #000;
+  }
+}
+
+@mixin btnHover($colour) {
+  box-shadow: 0px 2px 8px 0px $colour;
+}
+
+@mixin button-secondary {
+  @include button-style;
+  background-color: $secondary-color;
+  color: #fff;
+  cursor: pointer;
+}
+
+@mixin button-large {
+  width: $medium-btn-width;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.02rem;
+}
