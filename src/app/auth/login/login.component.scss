@@ -1,0 +1,42 @@
+@import "../../../assets/styles/variables.scss";
+
+.login {
+  @include container;
+  padding-top: 100px;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+
+  .modal {
+    @include modal(450px);
+
+    h2 {
+      margin-top: 10px;
+      margin-bottom: 20px;
+      font-weight: 400;
+    }
+
+    p.note {
+      text-align: center;
+      margin-top: 10px;
+      font-weight: 300;
+
+      a {
+        color: $light-primary-color;
+        font-weight: 400;
+      }
+    }
+
+    .form-group {
+      @include form-group;
+
+      input {
+        @include input-control;
+      }
+    }
+
+    button {
+      @include button-primary(100%);
+      margin-top: 10px;
+    }
+  }
+}

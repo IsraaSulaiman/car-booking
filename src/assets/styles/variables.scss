@@ -44,9 +44,46 @@ $medium-btn-width: 236px;
   cursor: pointer;
 }
 
+@mixin button-primary($width) {
+  @include button-style;
+  background-color: $primary-color;
+  width: $width;
+  color: #fff;
+  cursor: pointer;
+}
+
 @mixin button-large {
   width: $medium-btn-width;
   font-size: 16px;
   font-weight: 600;
   letter-spacing: 0.02rem;
+}
+
+@mixin modal($width) {
+  background: #fff;
+  margin: 0 auto;
+  width: $width;
+  padding: 25px 25px 50px 25px;
+  border-radius: 4px;
+}
+
+@mixin form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+
+  & label {
+    margin-bottom: 10px;
+  }
+}
+
+@mixin input-control {
+  padding: 10px 6px;
+  border-radius: 3px;
+  border: 1px solid rgba(0, 0, 0, 0.6);
+  outline: rgba(0, 0, 0, 0.6);
+
+  &::placeholder {
+    color: rgba(0, 0, 0, 0.4);
+  }
 }

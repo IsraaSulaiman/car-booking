@@ -1,3 +1,4 @@
+import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -7,7 +8,7 @@ import { CarCardComponent } from './car-card/car-card.component';
 
 @NgModule({
   declarations: [HeaderComponent, ContainerWithBgComponent, CarCardComponent],
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule.forChild([])],
   exports: [HeaderComponent, ContainerWithBgComponent, CarCardComponent],
 })
 export class SharedModule {}

@@ -1,0 +1,49 @@
+<section class="login">
+  <div class="modal">
+    <h2>Welcome Back! Login...</h2>
+    <form #loginForm="ngForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          [(ngModel)]="loginCreds.email"
+          placeholder="Enter Email"
+          autocomplete="false"
+          type="email"
+          id="email"
+          class="text-control"
+          name="email"
+          required
+          #email="ngModel"
+        />
+        <div class="error" *ngIf="!email.valid && !email.pristine">
+          <p [hidden]="!email.errors['required']">Email is Required</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          [(ngModel)]="loginCreds.password"
+          placeholder="Enter Password"
+          autocomplete="false"
+          type="password"
+          id="password"
+          class="text-control"
+          name="password"
+          minlength="8"
+          required
+          #password="ngModel"
+        />
+        <div class="error" *ngIf="!password.valid && !password.pristine">
+          <p [hidden]="!password.errors['minlength']">
+            Password should be at least 8 characters
+          </p>
+          <p [hidden]="!password.errors['required']">Password is required</p>
+        </div>
+      </div>
+      <button [disabled]="!loginForm.form.valid" type="submit">Login</button>
+    </form>
+    <p class="note">
+      Don't have an account? <a routerLink="/auth/register">Register Now</a>
+    </p>
+  </div>
+</section>
