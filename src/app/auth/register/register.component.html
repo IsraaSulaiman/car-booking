@@ -1,1 +1,221 @@
-<p>register works!</p>
+<section class="register">
+  <div class="modal">
+    <h2>Create a new account</h2>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="form-group">
+          <label for="firstName">First Name</label>
+          <input
+            formControlName="firstName"
+            placeholder="Enter First Name"
+            type="text"
+            id="firstName"
+            class="text-control"
+            name="firstName"
+            required
+          />
+          <div
+            class="error"
+            *ngIf="
+              !registerForm.controls['firstName'].valid &&
+              (registerForm.controls['firstName'].dirty ||
+                registerForm.controls['firstName'].touched)
+            "
+          >
+            <p
+              [hidden]="!registerForm.controls['firstName'].errors['required']"
+            >
+              first Name is Required
+            </p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="lastName">Last Name</label>
+          <input
+            formControlName="lastName"
+            placeholder="Enter Last Name"
+            autocomplete="false"
+            type="text"
+            id="lastName"
+            class="text-control"
+            name="lastName"
+            required
+          />
+          <div
+            class="error"
+            *ngIf="
+              !registerForm.controls['lastName'].valid &&
+              (registerForm.controls['lastName'].dirty ||
+                registerForm.controls['lastName'].touched)
+            "
+          >
+            <p [hidden]="!registerForm.controls['lastName'].errors['required']">
+              last Name is Required
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group">
+          <label for="mobile">Mobile</label>
+          <input
+            formControlName="mobile"
+            placeholder="Enter Mobile"
+            type="text"
+            id="mobile"
+            class="text-control"
+            name="mobile"
+            required
+          />
+          <div
+            class="error"
+            *ngIf="
+              !registerForm.controls['mobile'].valid &&
+              (registerForm.controls['mobile'].dirty ||
+                registerForm.controls['mobile'].touched)
+            "
+          >
+            <p [hidden]="!registerForm.controls['mobile'].errors['required']">
+              Mobile is Required
+            </p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            formControlName="email"
+            placeholder="Enter Email Address"
+            type="email"
+            id="email"
+            class="text-control"
+            name="email"
+            required
+          />
+          <div
+            class="error"
+            *ngIf="
+              !registerForm.controls['email'].valid &&
+              (registerForm.controls['email'].dirty ||
+                registerForm.controls['email'].touched)
+            "
+          >
+            <p [hidden]="!registerForm.controls['email'].errors['required']">
+              Email is Required
+            </p>
+            <p [hidden]="!registerForm.controls['email'].errors['email']">
+              Email is not valid
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group">
+          <label for="city">City</label>
+          <input
+            formControlName="city"
+            placeholder="Enter City"
+            type="text"
+            id="city"
+            class="text-control"
+            name="city"
+            required
+          />
+          <div
+            class="error"
+            *ngIf="
+              !registerForm.controls['city'].valid &&
+              (registerForm.controls['city'].dirty ||
+                registerForm.controls['city'].touched)
+            "
+          >
+            <p [hidden]="!registerForm.controls['city'].errors['required']">
+              City is Required
+            </p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="ID">ID</label>
+          <input
+            formControlName="ID"
+            placeholder="Enter ID"
+            type="text"
+            id="ID"
+            class="text-control"
+            name="ID"
+            required
+          />
+          <div
+            class="error"
+            *ngIf="
+              !registerForm.controls['ID'].valid &&
+              (registerForm.controls['ID'].dirty ||
+                registerForm.controls['ID'].touched)
+            "
+          >
+            <p [hidden]="!registerForm.controls['ID'].errors['required']">
+              ID is Required
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            formControlName="password"
+            placeholder="Enter Password"
+            type="password"
+            id="password"
+            class="text-control"
+            name="password"
+            required
+          />
+          <div
+            class="error"
+            *ngIf="
+              !registerForm.controls['password'].valid &&
+              (registerForm.controls['password'].dirty ||
+                registerForm.controls['password'].touched)
+            "
+          >
+            <p [hidden]="!registerForm.controls['password'].errors['required']">
+              Password is Required
+            </p>
+            <p
+              [hidden]="!registerForm.controls['password'].errors['minlength']"
+            >
+              Password should be at least 8 characters
+            </p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <input
+            formControlName="confirmPassword"
+            placeholder="Re-Enter Password"
+            type="password"
+            id="confirmPassword"
+            class="text-control"
+            name="confirmPassword"
+            required
+          />
+          {{ registerForm.errors | json }}
+
+          <div
+            class="error"
+            *ngIf="
+              registerForm.errors?.match &&
+              (registerForm.touched || registerForm.dirty)
+            "
+          >
+            <p>Passwords don't match</p>
+          </div>
+        </div>
+      </div>
+      <button [disabled]="!registerForm.valid" type="submit">
+        Create Account
+      </button>
+    </form>
+    <p class="note">Have an account? <a routerLink="/auth/login">Login</a></p>
+  </div>
+</section>

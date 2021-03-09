@@ -1,0 +1,47 @@
+@import "../../../assets/styles/variables.scss";
+
+.register {
+  @include container;
+  padding-top: 100px;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.modal {
+  @include modal(650px);
+
+  h2 {
+    margin-bottom: 20px;
+    font-weight: 400;
+  }
+
+  .row {
+    display: flex;
+    gap: 10px;
+
+    .form-group {
+      @include form-group;
+      width: 50%;
+
+      input {
+        @include input-control;
+      }
+    }
+  }
+
+  p.note {
+    text-align: center;
+    margin-top: 10px;
+    font-weight: 300;
+
+    a {
+      color: $light-primary-color;
+      font-weight: 400;
+    }
+  }
+
+  button {
+    @include button-primary(100%);
+    margin-top: 10px;
+  }
+}
