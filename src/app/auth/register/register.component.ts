@@ -1,6 +1,8 @@
+import { AuthService } from './../auth.service';
 import { passwordMatchValidator } from './passwordsValidator';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -8,8 +10,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent {
-  registerForm: FormGroup;
-  constructor(private fb: FormBuilder) {
+  public registerForm: FormGroup;
+
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {
     this.registerForm = this.fb.group(
       {
         firstName: ['', Validators.required],
@@ -32,6 +39,11 @@ export class RegisterComponent {
   }
 
   onSubmit() {
-    console.log(this.registerForm.value);
+    this.authService.register(this.registerForm.value).subscribe(
+      (resp: any) => {
+        if (resp.isSuccess) this.router.navigate(['/auth/login']);
+      },
+      (error) => console.log(error, 'error')
+    );
   }
 }

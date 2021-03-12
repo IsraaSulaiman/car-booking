@@ -1,5 +1,7 @@
-import { LoginCreds } from './login.model';
-import { Component, OnInit } from '@angular/core';
+import { AuthService } from './../auth.service';
+import { LoginCreds } from './../auth.model';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,11 +11,16 @@ import { Component, OnInit } from '@angular/core';
 export class LoginComponent {
   loginCreds: LoginCreds;
 
-  constructor() {
+  constructor(private authService: AuthService, private router: Router) {
     this.loginCreds = new LoginCreds();
   }
 
   onSubmit() {
-    console.log(this.loginCreds, 'form');
+    this.authService.login(this.loginCreds).subscribe(
+      (resp: any) => {
+        if (resp.isSuccess) this.router.navigate(['/']);
+      },
+      (error) => console.log(error, 'error')
+    );
   }
 }
