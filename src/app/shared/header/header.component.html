@@ -4,8 +4,11 @@
       ><h1>Booking<span>.com</span></h1>
     </a>
     <div class="left-col">
-      <a routerLink="/auth/register">
+      <a *ngIf="!isLogged" routerLink="/auth/register">
         <button class="btn primary">Register</button></a
+      >
+      <a *ngIf="isLogged" (click)="logout()">
+        <button class="btn primary">Logout</button></a
       >
     </div>
   </nav>

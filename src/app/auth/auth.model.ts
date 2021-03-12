@@ -13,6 +13,16 @@ export interface User {
   city: string;
 }
 
+export enum UserTypes {
+  Individual = 1,
+  Admin = 2,
+}
+
+export interface CurrentUser extends User {
+  fullName: string;
+  role: UserTypes;
+}
+
 export interface NewUser extends User {
   password: string;
 }
