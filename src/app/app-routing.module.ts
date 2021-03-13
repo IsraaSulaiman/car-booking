@@ -1,6 +1,6 @@
 import { RoleGuard } from './shared/guards/role.guard';
 import { UnauthenticatedGuard } from './shared/guards/unauthenticated.guard';
-import { AuthGuard } from './shared/guards/auth.guard';
+import { AuthGuard } from './auth/auth.guard';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -13,11 +13,13 @@ const routes: Routes = [
   },
   {
     path: 'auth',
+    canLoad: [UnauthenticatedGuard],
     canActivate: [UnauthenticatedGuard],
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
   },
   {
     path: 'home',
+    canLoad: [AuthGuard],
     canActivate: [AuthGuard, RoleGuard],
     loadChildren: () =>
       import('./user-home/user-home.module').then((m) => m.UserHomeModule),

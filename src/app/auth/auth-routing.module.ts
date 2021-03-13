@@ -1,3 +1,4 @@
+import { DiscardChangesGuard } from './../shared/guards/discard-changes.guard';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { NgModule } from '@angular/core';
@@ -12,6 +13,7 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent,
+    canDeactivate: [DiscardChangesGuard],
   },
   {
     path: 'login',

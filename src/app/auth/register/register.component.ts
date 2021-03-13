@@ -3,6 +3,7 @@ import { passwordMatchValidator } from './passwordsValidator';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -45,5 +46,15 @@ export class RegisterComponent {
       },
       (error) => console.log(error, 'error')
     );
+  }
+
+  canDeactivate(): boolean | Observable<boolean> {
+    if (this.registerForm.untouched) return true;
+    else
+      return of(
+        window.confirm(
+          `The changes will be dismissed. Are you sure you don't want to continue making the account?`
+        )
+      );
   }
 }
