@@ -26,7 +26,6 @@ export class AuthGuard implements CanActivate, CanLoad, CanActivateChild {
 
   canLoad(route: Route, segments: UrlSegment[]): boolean {
     const url = `/${route.path}`;
-    console.log(url, this.checkLogin(url), 'result');
     return true;
     // return this.checkLogin(url);
   }

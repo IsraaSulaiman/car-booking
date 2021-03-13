@@ -57,7 +57,6 @@ export class AuthService {
     let idToken = localStorage.getItem('id_token');
     if (idToken) {
       let decoded: any = jwt_decode(idToken);
-      console.log(decoded, 'decoded');
       if (this.checkIfTokenExpired(decoded.expiresIn)) return this.logout();
       this.token = decoded;
       this._expiresIn = decoded.expiresIn;
