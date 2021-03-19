@@ -1,4 +1,4 @@
-import { LoginCreds, NewUser } from './auth.model';
+import { LoginCreds, NewUser, UserTypes } from './auth.model';
 import { Injectable } from '@angular/core';
 import { of, throwError } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -7,8 +7,13 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 const jwt =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwiaWQiOiIxIiwicm9sZSI6MSwiZXhwaXJlZEF0IjoxNjE1NzU5MjAwMDAwLCJpYXQiOjE1MTYyMzkwMjJ9.2VrT2nsLHshyXdjJHm4V3_54CbX5xduD8zBdW3xwpKo';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwiaWQiOiIxIiwicm9sZSI6MSwiZXhwaXJlZEF0IjoxNjE1OTMyMDAwMDAwLCJpYXQiOjE1MTYyMzkwMjJ9.wkQk_NtM7mmWluTmmTx1BssPhShmMG9NiCEZSDuC4sI';
 
+export interface Token {
+  id: string;
+  expiredAt: number;
+  role: UserTypes;
+}
 @Injectable({
   providedIn: 'root',
 })
@@ -48,18 +53,24 @@ export class AuthService {
   }
 
   isLoggedIn() {
-    return !this.checkIfTokenExpired(this._expiresIn) && this._token
+    return this.token &&
+      this._expiresIn &&
+      !this.checkIfTokenExpired(this._expiresIn)
       ? true
       : false;
   }
 
   verifyToken() {
     let idToken = localStorage.getItem('id_token');
-    if (idToken) {
-      let decoded: any = jwt_decode(idToken);
-      if (this.checkIfTokenExpired(decoded.expiresIn)) return this.logout();
+    if (!idToken) return;
+    let token = localStorage.getItem('id_token');
+    if (!token) return;
+    try {
+      let decoded: Token = jwt_decode(idToken);
       this.token = decoded;
-      this._expiresIn = decoded.expiresIn;
+      this._expiresIn = decoded.expiredAt;
+    } catch (error) {
+      this.logout();
     }
   }
 
