@@ -1,0 +1,24 @@
+@import "../../assets/styles/variables.scss";
+
+.rent-sec {
+  padding-top: 15vh;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #fff;
+
+  .rent-sec_form {
+    width: 100%;
+  }
+
+  & h2 {
+    margin-bottom: 30px;
+  }
+}
+
+.cars-sec {
+  @include container;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}

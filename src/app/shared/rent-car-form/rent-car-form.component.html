@@ -1,0 +1,44 @@
+<form class="rent-form">
+  <div class="row">
+    <div class="form-group">
+      <label for="city">City</label>
+      <input type="text" id="city" name="city" class="input-control" />
+    </div>
+    <div class="form-group">
+      <label for="pickup-location">Picup Location</label>
+      <input type="text" id="pickup-location" class="input-control" />
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group">
+      <label for="pickup-date">Pickup Date</label>
+      <input type="text" id="pickup-date" class="input-control" />
+    </div>
+    <div class="form-group">
+      <label for="dropoff-date">Dropoff Date</label>
+      <input type="text" id="dropoff-date" class="input-control" />
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group">
+      <label for="car">Select a car</label>
+      <select
+        placeholder="select a car"
+        [disabled]="selectedCar"
+        id="car"
+        class="input-control"
+      >
+        <option [value]="car.id" *ngFor="let car of cars$ | async">
+          {{ car.name }}
+        </option>
+      </select>
+    </div>
+    <div class="form-group checkbox">
+      <label for="isReturned">Return car to same location</label>
+      <input type="checkbox" id="isReturned" class="input-control" />
+    </div>
+  </div>
+  <div class="actions-row">
+    <button class="btn">Rent Car</button>
+  </div>
+</form>

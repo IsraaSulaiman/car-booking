@@ -27,6 +27,20 @@ const routes: Routes = [
       allowedRoles: [1],
     },
   },
+  {
+    path: 'cars',
+    canLoad: [AuthGuard],
+    canActivate: [AuthGuard],
+    loadChildren: () => import('./cars/cars.module').then((m) => m.CarsModule),
+  },
+
+  {
+    path: 'bookings',
+    canLoad: [AuthGuard],
+    canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('./bookings/bookings.module').then((m) => m.BookingsModule),
+  },
 ];
 
 @NgModule({

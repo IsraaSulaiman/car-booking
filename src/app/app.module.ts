@@ -6,6 +6,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpInteceptors } from './http-interceptors';
+import { CarsComponent } from './cars/cars.component';
+import { CarDetailsComponent } from './cars/car-details/car-details.component';
 
 @NgModule({
   declarations: [AppComponent],

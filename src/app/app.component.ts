@@ -14,7 +14,11 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.authService.verifyToken();
-    this.currentUserService.getUser();
+    this.authService.decodeToken();
+    this.currentUserService.getUserData();
+  }
+
+  get isIndividual() {
+    return this.currentUserService.userRole === 1;
   }
 }

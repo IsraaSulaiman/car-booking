@@ -20,4 +20,13 @@ export class CarsService {
       )
     );
   }
+
+  getById(id): Observable<Car> {
+    return of({
+      id,
+      name: 'Mini Perodua Axia ',
+      price: 27.18,
+      image: '../../assets/images/car1.png',
+    });
+  }
 }

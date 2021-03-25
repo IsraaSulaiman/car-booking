@@ -1,0 +1,47 @@
+@import "../../../assets/styles/variables.scss";
+
+.rent-form {
+  background-color: #fff;
+  color: #333;
+  padding: 20px;
+  width: 40%;
+  margin: 0 auto;
+  border-radius: 3px;
+
+  & .row {
+    display: flex;
+    gap: 20px;
+  }
+
+  & .form-group {
+    @include form-group;
+    width: 50%;
+
+    &.checkbox {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      & label {
+        order: 2;
+        margin: 0 10px;
+      }
+    }
+  }
+
+  & .input-control {
+    @include input-control;
+  }
+
+  .actions-row {
+    display: flex;
+    justify-content: flex-end;
+
+    & .btn {
+      @include button-primary(170px);
+      &:hover {
+        @include btnHover($light-primary-color);
+      }
+    }
+  }
+}

@@ -28,7 +28,7 @@ export class UnauthenticatedGuard implements CanActivate, CanLoad {
   }
 
   checkNotLogin() {
-    if (this.authService.isLoggedIn()) {
+    if (this.authService.isLogged()) {
       this.router.navigate(['/']);
       return false;
     }

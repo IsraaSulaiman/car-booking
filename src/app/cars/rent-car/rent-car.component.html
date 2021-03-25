@@ -1,0 +1,6 @@
+<section>
+  <ng-container *ngIf="car$ | async as car">
+    <app-rent-car-form [selectedCar]="car"></app-rent-car-form>
+    <h2 [hidden]="car || car.name">No Car Found</h2>
+  </ng-container>
+</section>

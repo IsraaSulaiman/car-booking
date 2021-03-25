@@ -14,6 +14,6 @@ export class HeaderComponent {
   }
 
   get isLogged() {
-    return this.authService.isLoggedIn();
+    return this.authService.isLogged();
   }
 }

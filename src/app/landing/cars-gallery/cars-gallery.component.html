@@ -2,7 +2,7 @@
   <h2>Our Cars Gallary</h2>
   <ul>
     <li *ngFor="let car of cars$ | async">
-      <app-car-card></app-car-card>
+      <app-car-card [car]="car"></app-car-card>
     </li>
   </ul>
 </section>

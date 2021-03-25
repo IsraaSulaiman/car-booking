@@ -1,0 +1,10 @@
+<section class="car-details">
+  <div class="header">
+    <h2>Car Details</h2>
+    <button class="btn" (click)="goBack()">Go Back</button>
+  </div>
+  <ng-container *ngIf="car$ | async as car">
+    <section class="content">{{ car | json }}</section>
+    <h2 [hidden]="car || car.name">No details found for this car</h2>
+  </ng-container>
+</section>

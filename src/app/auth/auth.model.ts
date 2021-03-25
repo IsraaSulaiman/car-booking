@@ -8,7 +8,7 @@ export interface User {
   lastName: string;
   id: string;
   email: string;
-  phone: string;
+  mobile: string;
   ID: string;
   city: string;
 }

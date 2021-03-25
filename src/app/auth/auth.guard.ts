@@ -26,8 +26,7 @@ export class AuthGuard implements CanActivate, CanLoad, CanActivateChild {
 
   canLoad(route: Route, segments: UrlSegment[]): boolean {
     const url = `/${route.path}`;
-    return true;
-    // return this.checkLogin(url);
+    return this.checkLogin(url);
   }
 
   canActivateChild(
@@ -38,12 +37,12 @@ export class AuthGuard implements CanActivate, CanLoad, CanActivateChild {
   }
 
   checkLogin(url) {
-    if (url === '/' && this.authService.isLoggedIn()) {
+    if (url === '/' && this.authService.isLogged()) {
       this.router.navigate(['/home']);
       return false;
-    } else if (url === '/' && !this.authService.isLoggedIn()) {
+    } else if (url === '/' && !this.authService.isLogged()) {
       return true;
-    } else if (this.authService.isLoggedIn()) {
+    } else if (this.authService.isLogged()) {
       return true;
     }
     return false;

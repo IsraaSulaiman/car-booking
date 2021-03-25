@@ -7,6 +7,7 @@
       <a *ngIf="!isLogged" routerLink="/auth/register">
         <button class="btn primary">Register</button></a
       >
+      <ng-content></ng-content>
       <a *ngIf="isLogged" (click)="logout()">
         <button class="btn primary">Logout</button></a
       >

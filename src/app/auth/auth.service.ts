@@ -1,74 +1,71 @@
-import { LoginCreds, NewUser, UserTypes } from './auth.model';
+import { LoginCreds, NewUser } from './auth.model';
 import { Injectable } from '@angular/core';
-import { of, throwError } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import jwt_decode from 'jwt-decode';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 
-const jwt =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwiaWQiOiIxIiwicm9sZSI6MSwiZXhwaXJlZEF0IjoxNjE1OTMyMDAwMDAwLCJpYXQiOjE1MTYyMzkwMjJ9.wkQk_NtM7mmWluTmmTx1BssPhShmMG9NiCEZSDuC4sI';
-
-export interface Token {
-  id: string;
+import { user } from '../users/user.service';
+export interface DecodedToken {
   expiredAt: number;
-  role: UserTypes;
+  id: string;
 }
+
+const jwt =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwiaWQiOiIxIiwicm9sZSI6MSwiZXhwaXJlZEF0IjoxNjQ3NzI3MjAwMDAwLCJpYXQiOjE1MTYyMzkwMjJ9.WdF7XG28WoPyx66AKx3iGW4LcSGppKoHrKQSnPh17Qg';
+
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private _token: { id; role };
-  private _expiresIn: number;
+  private _token: DecodedToken;
+  expiredAt: number;
 
   constructor(private router: Router) {}
 
   login(creds: LoginCreds) {
-    // A call to the backend to send creds
     return of({
       isSuccess: true,
-      data: {
-        authResult: {
-          idToken: jwt,
-        },
+      authResult: {
+        idToken: jwt,
       },
-    }).pipe(tap((resp) => this.setSession(resp.data.authResult)));
+      user: { ...user, id: 1 },
+    }).pipe(
+      tap((resp) => {
+        this.setSession(resp.authResult);
+        this.decodeToken();
+      })
+    );
   }
 
-  register(user: NewUser) {
-    // A call to the backend to create new user
-    return of({ isSuccess: true });
+  setSession({ idToken }) {
+    localStorage.setItem('id_token', idToken);
   }
 
-  setSession(authResult) {
-    localStorage.setItem('id_token', authResult.idToken);
-    this.verifyToken();
+  register(user: NewUser): Observable<any> {
+    //Call
+    return of({
+      isSuccess: true,
+    });
+    // return this.throwError();
   }
 
-  logout() {
-    localStorage.removeItem('id_token');
-    this.token = null;
-    this._expiresIn = null;
-    this.router.navigate(['/']);
-  }
-
-  isLoggedIn() {
-    return this.token &&
-      this._expiresIn &&
-      !this.checkIfTokenExpired(this._expiresIn)
-      ? true
-      : false;
-  }
-
-  verifyToken() {
-    let idToken = localStorage.getItem('id_token');
-    if (!idToken) return;
+  decodeToken() {
     let token = localStorage.getItem('id_token');
     if (!token) return;
     try {
-      let decoded: Token = jwt_decode(idToken);
-      this.token = decoded;
-      this._expiresIn = decoded.expiredAt;
+      let decoded: DecodedToken = jwt_decode(token);
+      if (
+        decoded &&
+        decoded.expiredAt &&
+        this.checkIfTokenExpired(decoded.expiredAt)
+      ) {
+        this.token = decoded;
+        this.expiredAt = decoded?.expiredAt;
+      } else {
+        this.logout();
+      }
     } catch (error) {
       this.logout();
     }
@@ -82,22 +79,35 @@ export class AuthService {
     this._token = token;
   }
 
-  get userId() {
-    return this.token?.id;
-  }
-
   checkIfTokenExpired(dt) {
-    let now = new Date().getTime();
-    return dt && dt > now ? true : false;
+    return dt > new Date().getTime() ? true : false;
   }
 
-  //Mock Method to generate error
+  isLogged(): boolean {
+    return this.token &&
+      this.expiredAt &&
+      this.checkIfTokenExpired(this.expiredAt)
+      ? true
+      : false;
+  }
+
+  logout() {
+    localStorage.removeItem('id_token');
+    this.token = null;
+    this.expiredAt = null;
+    this.router.navigate(['/']);
+  }
+
   throwError() {
-    const errorResponse = new HttpErrorResponse({
-      error: 'Password or email is invalid',
-      status: 400,
+    let error = new HttpErrorResponse({
+      error: 'Invalid Email or Password',
+      status: 401,
       statusText: 'Bad Request',
     });
-    return throwError(errorResponse);
+    return throwError(error);
+  }
+
+  get userId() {
+    return this.token && this.token.id;
   }
 }

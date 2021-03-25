@@ -1,0 +1,28 @@
+@import "../../../assets/styles/variables.scss";
+
+section.car-details {
+  @include container;
+  padding-top: 100px;
+
+  & .header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+  }
+
+  .btn {
+    @include button-default;
+    cursor: pointer;
+    width: 100px;
+  }
+
+  & .content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  & .rent-form {
+    width: 100%;
+  }
+}

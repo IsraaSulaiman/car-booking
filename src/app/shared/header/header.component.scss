@@ -28,6 +28,9 @@
     }
 
     .left-col {
+      display: flex;
+      gap: 20px;
+      align-items: center;
     }
 
     .left-col button {

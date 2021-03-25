@@ -1,4 +1,10 @@
-<app-header></app-header>
+<app-header>
+  <ng-container *ngIf="isIndividual">
+    <ul class="navigation">
+      <li><a routerLink="/bookings">My bookings</a></li>
+    </ul>
+  </ng-container>
+</app-header>
 <main>
   <router-outlet></router-outlet>
 </main>
